@@ -1,0 +1,216 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "contact": {
+      "email": "eti@cisco.io",
+      "name": "API Support"
+    },
+    "description": "This is a Kosha REST serice for exposing many 3rd party features as REST APIs with better consistency, observability etc",
+    "termsOfService": "http://swagger.io/terms/",
+    "title": "Custom Connector API",
+    "version": "2.0"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "paths": {
+    "/api/v2/customconnector/createservice": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "createRecords"
+        ],
+        "description": "Create a record for airtable",
+        "summary": "Create a record for a project"
+      }
+    },
+    "/api/v2/customconnector/deleteservice": {
+      "delete": {
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "deleteService"
+        ],
+        "description": "delete a record for the airtable",
+        "summary": "delete a record for a project"
+      }
+    },
+    "/api/v2/customconnector/getservice": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "Records"
+        ],
+        "description": "Get service",
+        "summary": "Get 3rd party api url"
+      }
+    },
+    "/api/v2/customconnector/specification/list": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "bad request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "permission denied"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "not found"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "internal server error"
+          }
+        },
+        "tags": [
+          "specification"
+        ],
+        "description": "Get all environment variables that need to be supplied",
+        "summary": "Get details of the connector specification"
+      }
+    },
+    "/api/v2/customconnector/specification/test": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "bad request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "permission denied"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "not found"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "internal server error"
+          }
+        },
+        "tags": [
+          "specification"
+        ],
+        "description": "Check if domain account can be verified",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/models.Specification"
+              }
+            }
+          },
+          "description": "Enter api key and domain name properties"
+        },
+        "summary": "Test if API key and domain name work against the specification"
+      }
+    },
+    "/api/v2/customconnector/updateservice": {
+      "put": {
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "updateService"
+        ],
+        "description": "Update a record for the airtable",
+        "summary": "update a record for a project"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "models.Specification": {
+        "properties": {
+          "api_key": {
+            "type": "string"
+          },
+          "domain_name": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    }
+  }
+}

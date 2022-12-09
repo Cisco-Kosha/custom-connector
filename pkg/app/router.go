@@ -39,7 +39,7 @@ func (a *App) listConnectorSpecification(w http.ResponseWriter, r *http.Request)
 // @Accept  json
 // @Produce  json
 // @Param text body models.Specification false "Enter api key and domain name properties"
-// @Success 200 {object} models.Groups
+// @Success 200
 // @Failure      400  {object} string "bad request"
 // @Failure      403  {object}  string "permission denied"
 // @Failure      404  {object}  string "not found"

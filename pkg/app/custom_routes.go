@@ -13,11 +13,8 @@ import (
 // @Tags Records
 // @Accept  json
 // @Produce  json
-// @Param baseId path string true "Base Id"
-// @Param tableIdOrName path string true "Table Id"
-// @Param recordId path string true "Base Id"
-// @Success 200 {object}
-// @Router /api/v2/customconnector/createservice [get]
+// @Success 200
+// @Router /api/v2/customconnector/getservice [get]
 func (a *App) getRecords(w http.ResponseWriter, r *http.Request) {
 
 	//Allow CORS here By * or specific origin
@@ -30,7 +27,7 @@ func (a *App) getRecords(w http.ResponseWriter, r *http.Request) {
 	} else {
 		respondWithError(w, http.StatusBadRequest, "Empty Body")
 	}
-	res, err := httpclient.GetRecord(url, bodyBytes, a.Cfg.GetPersonalAccessToken())
+	res, err := httpclient.GetRecord("https://www.google.com/", bodyBytes, a.Cfg.GetPersonalAccessToken())
 	if err != nil {
 		a.Log.Errorf("Error in GetRecord", err)
 		respondWithError(w, http.StatusBadRequest, err.Error())
@@ -45,7 +42,6 @@ func (a *App) getRecords(w http.ResponseWriter, r *http.Request) {
 // @Tags createRecords
 // @Accept json
 // @Produce json
-// @Param project body models.Record false "Enter project risk properties"
 // @Success 200
 // @Router /api/v2/customconnector/createservice [get]
 func (a *App) createRecords(w http.ResponseWriter, r *http.Request) {
@@ -59,7 +55,7 @@ func (a *App) createRecords(w http.ResponseWriter, r *http.Request) {
 		respondWithError(w, http.StatusBadRequest, "Empty Body")
 	}
 
-	res, err := httpclient.CreateRecord(url, bodyBytes, a.Cfg.GetPersonalAccessToken())
+	res, err := httpclient.CreateRecord("https://www.google.com/", bodyBytes, a.Cfg.GetPersonalAccessToken())
 	if err != nil {
 		a.Log.Errorf("Error in createRecord", err)
 		respondWithError(w, http.StatusBadRequest, err.Error())
@@ -73,7 +69,6 @@ func (a *App) createRecords(w http.ResponseWriter, r *http.Request) {
 // @Description delete a record for the airtable
 // @Tags deleteService
 // @Produce json
-// @Param project body
 // @Success 200
 // @Router /api/v2/customconnector/deleteservice [delete]
 func (a *App) deleteRecords(w http.ResponseWriter, r *http.Request) {
@@ -86,7 +81,7 @@ func (a *App) deleteRecords(w http.ResponseWriter, r *http.Request) {
 	} else {
 		respondWithError(w, http.StatusBadRequest, "Empty Body")
 	}
-	res, err := httpclient.DeleteRecord(url, bodyBytes, a.Cfg.GetPersonalAccessToken())
+	res, err := httpclient.DeleteRecord("https://www.google.com/", bodyBytes, a.Cfg.GetPersonalAccessToken())
 	if err != nil {
 		a.Log.Errorf("Error in deleteRecord", err)
 		respondWithError(w, http.StatusBadRequest, err.Error())
@@ -100,7 +95,6 @@ func (a *App) deleteRecords(w http.ResponseWriter, r *http.Request) {
 // @Tags updateService
 // @Accept json
 // @Produce json
-// @Param project body
 // @Success 200
 // @Router /api/v2/customconnector/updateservice [put]
 func (a *App) updateRecords(w http.ResponseWriter, r *http.Request) {
@@ -114,7 +108,7 @@ func (a *App) updateRecords(w http.ResponseWriter, r *http.Request) {
 		respondWithError(w, http.StatusBadRequest, "Empty Body")
 	}
 
-	res, err := httpclient.UpdateRecord(url, bodyBytes, a.Cfg.GetPersonalAccessToken())
+	res, err := httpclient.UpdateRecord("https://www.google.com/", bodyBytes, a.Cfg.GetPersonalAccessToken())
 	if err != nil {
 		a.Log.Errorf("Error in updateRecord", err)
 		respondWithError(w, http.StatusBadRequest, err.Error())

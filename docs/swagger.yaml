@@ -1,0 +1,137 @@
+basePath: /
+definitions:
+  models.Specification:
+    properties:
+      api_key:
+        type: string
+      domain_name:
+        type: string
+    type: object
+host: localhost:8012
+info:
+  contact:
+    email: eti@cisco.io
+    name: API Support
+  description: This is a Kosha REST serice for exposing many 3rd party features as
+    REST APIs with better consistency, observability etc
+  termsOfService: http://swagger.io/terms/
+  title: Custom Connector API
+  version: "2.0"
+paths:
+  /api/v2/customconnector/createservice:
+    get:
+      consumes:
+      - application/json
+      description: Create a record for airtable
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Create a record for a project
+      tags:
+      - createRecords
+  /api/v2/customconnector/deleteservice:
+    delete:
+      description: delete a record for the airtable
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: delete a record for a project
+      tags:
+      - deleteService
+  /api/v2/customconnector/getservice:
+    get:
+      consumes:
+      - application/json
+      description: Get service
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Get 3rd party api url
+      tags:
+      - Records
+  /api/v2/customconnector/specification/list:
+    get:
+      consumes:
+      - application/json
+      description: Get all environment variables that need to be supplied
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "400":
+          description: bad request
+          schema:
+            type: string
+        "403":
+          description: permission denied
+          schema:
+            type: string
+        "404":
+          description: not found
+          schema:
+            type: string
+        "500":
+          description: internal server error
+          schema:
+            type: string
+      summary: Get details of the connector specification
+      tags:
+      - specification
+  /api/v2/customconnector/specification/test:
+    post:
+      consumes:
+      - application/json
+      description: Check if domain account can be verified
+      parameters:
+      - description: Enter api key and domain name properties
+        in: body
+        name: text
+        schema:
+          $ref: '#/definitions/models.Specification'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: bad request
+          schema:
+            type: string
+        "403":
+          description: permission denied
+          schema:
+            type: string
+        "404":
+          description: not found
+          schema:
+            type: string
+        "500":
+          description: internal server error
+          schema:
+            type: string
+      summary: Test if API key and domain name work against the specification
+      tags:
+      - specification
+  /api/v2/customconnector/updateservice:
+    put:
+      consumes:
+      - application/json
+      description: Update a record for the airtable
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: update a record for a project
+      tags:
+      - updateService
+swagger: "2.0"
