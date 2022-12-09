@@ -1,0 +1,27 @@
+{
+  "version": "2.0.0",
+  "fields": [
+    {
+      "field": "ACCESS_TOKEN",
+      "displayName": "CustomService API KEY",
+      "type": "String",
+      "minLength": 6,
+      "maxLength": 20,
+      "required": true,
+      "description": "CustomService API KEY",
+      "example": "NPfWE2p1H7yBzIXnRB",
+      "helpSection": "Login to your 3rd party api account \n Go to Dashboard -> Edit Profile \n To the right side, you should see the personal access token generated associated with your user account"
+    },
+    {
+      "field": "DOMAIN_NAME",
+      "displayName": "CustomService API KEY",
+      "type": "String",
+      "minLength": 4,
+      "maxLength": 60,
+      "required": true,
+      "description": "Company name registered with 3rd Party account",
+      "example": "acmecorp",
+      "helpSection": "Enter the comapny name that you provided when you signed up to airtable \n If your airtable account URL is: domainname.<service_url>.com then your domain name is acmecorp"
+    }
+  ]
+}
