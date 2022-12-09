@@ -24,8 +24,19 @@ func (a *App) getRecords(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "*")
-	agents := httpclient.GetRecords(url, a.Cfg.GetPersonalAccessToken())
-	respondWithJSON(w, http.StatusOK, agents)
+	var bodyBytes []byte
+	if r.Body != nil {
+		bodyBytes, _ = ioutil.ReadAll(r.Body)
+	} else {
+		respondWithError(w, http.StatusBadRequest, "Empty Body")
+	}
+	res, err := httpclient.GetRecord(url, bodyBytes, a.Cfg.GetPersonalAccessToken())
+	if err != nil {
+		a.Log.Errorf("Error in GetRecord", err)
+		respondWithError(w, http.StatusBadRequest, err.Error())
+	}
+	respondWithJSON(w, http.StatusOK, res)
+
 }
 
 // createService= godoc
@@ -75,7 +86,6 @@ func (a *App) deleteRecords(w http.ResponseWriter, r *http.Request) {
 	} else {
 		respondWithError(w, http.StatusBadRequest, "Empty Body")
 	}
-
 	res, err := httpclient.DeleteRecord(url, bodyBytes, a.Cfg.GetPersonalAccessToken())
 	if err != nil {
 		a.Log.Errorf("Error in deleteRecord", err)
